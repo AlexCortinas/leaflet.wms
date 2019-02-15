@@ -420,6 +420,9 @@ wms.Overlay = L.Layer.extend({
             if (this.options.isBack === false) {
                 overlay.bringToFront();
             }
+            if (this.options.zIndex !== undefined) {
+                overlay.setZIndex(this.options.zIndex);
+            }
         }
         if ((this._map.getZoom() < this.options.minZoom) ||
             (this._map.getZoom() > this.options.maxZoom)){
@@ -445,6 +448,13 @@ wms.Overlay = L.Layer.extend({
         this.options.isBack = false;
         if (this._currentOverlay) {
             this._currentOverlay.bringToFront();
+        }
+    },
+
+    'setZIndex': function(zIndex) {
+        this.options.zIndex = zIndex;
+        if (this._currentOverlay) {
+            this._currentOverlay.setZIndex(zIndex);
         }
     },
 
